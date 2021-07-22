@@ -25,7 +25,7 @@ export default function Home() {
       </header>
       <div className="flex flex-col justify-center items-center">
         <h1 className="mb-8 text-4xl font-medium text-center">
-          What's the occasion?
+          What&apos;s the occasion?
         </h1>
         <form className="" onSubmit={handleFormSubmission}>
           <input
