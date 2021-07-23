@@ -1,15 +1,13 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
 import React from "react";
 import { useCreateActivityContext } from "../context/CreateActivityContext";
+import Calendar from "../components/Calendar";
 
-export default function Home() {
-  const router = useRouter();
-  const { occasion, setOccasion } = useCreateActivityContext();
+export default function Time() {
+  const { occasion, dates } = useCreateActivityContext();
 
   const handleFormSubmission = (e: React.FormEvent) => {
     e.preventDefault();
-    router.push("/time");
   };
 
   React.useEffect(() => {
@@ -17,14 +15,13 @@ export default function Home() {
       if (event.code === "Enter" && event.metaKey) {
         console.log("Enter key was pressed. Run your function.");
         event.preventDefault();
-        router.push("/time");
       }
     };
     document.addEventListener("keydown", listener);
     return () => {
       document.removeEventListener("keydown", listener);
     };
-  }, [router]);
+  }, []);
 
   return (
     <div className="min-h-screen p-2">
@@ -47,26 +44,18 @@ export default function Home() {
             htmlFor="occasion"
             className="mb-4 block text-3xl sm:text-6xl font-bold"
           >
-            What&apos;s the occasion?
+            Choose possible dates:
           </label>
-          <textarea
-            id="occasion"
-            className="mb-4 p-3 outline-none appearance-none bg-black text-white w-full text-3xl sm:text-6xl"
-            value={occasion}
-            onChange={(e) => setOccasion(e.target.value)}
-            onFocus={(e) => {
-              const val = e.target.value;
-              e.target.value = "";
-              e.target.value = val;
-            }}
-            autoFocus
-            rows={5}
-            maxLength={140}
-          />
+          <div
+            id="dates"
+            className="mb-4 p-3 outline-none appearance-none bg-black text-white w-full text-6xl"
+          >
+            <Calendar />
+          </div>
           <button
             type="submit"
             className="bg-gray-600 text-white py-2 px-4 ml-auto block text-lg disabled:cursor-not-allowed disabled:text-gray-500"
-            disabled={occasion.length < 1}
+            disabled={!dates || dates.length === 0}
           >
             continue
           </button>
