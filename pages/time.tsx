@@ -32,7 +32,10 @@ export default function Time() {
           content="Easy decision making for group activities."
         />
         <link rel="icon" href="/favicon.ico" />
-        <link href="http://fonts.cdnfonts.com/css/kollektif" rel="stylesheet" />
+        <link
+          href="https://fonts.cdnfonts.com/css/kollektif"
+          rel="stylesheet"
+        />
       </Head>
       <header className="mb-12">
         <h1 className="text-3xl font-bold">brewdle</h1>
