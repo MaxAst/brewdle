@@ -42,7 +42,7 @@ export default function Vote() {
               className="flex items-center justify-between text-2xl sm:text-5xl mb-2"
             >
               <div className="flex items-center">
-                <div className="w-14 text-right mr-2">{index + 1}.</div>
+                <div className="w-7 sm:w-14 text-right mr-2">{index + 1}.</div>
                 <a
                   className="hover:underline"
                   href={

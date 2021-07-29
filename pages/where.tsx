@@ -47,7 +47,7 @@ const PlaceForm = () => {
       <input
         id="where"
         ref={ref}
-        className="mb-2 p-3 outline-none appearance-none bg-black text-white w-full text-3xl sm:text-6xl"
+        className="mb-2 p-3 outline-none appearance-none bg-black text-white w-full text-3xl sm:text-6xl border-0"
         value={name}
         placeholder="name of place"
         onChange={(e) => setName(e.target.value)}
@@ -55,7 +55,7 @@ const PlaceForm = () => {
       />
       <input
         id="where"
-        className="mb-2 p-3 outline-none appearance-none bg-black text-white w-full text-xl sm:text-3xl"
+        className="mb-2 p-3 outline-none appearance-none bg-black text-white w-full text-xl sm:text-3xl border-0"
         value={link}
         placeholder="link (optional)"
         onChange={(e) => setLink(e.target.value)}
@@ -108,18 +108,22 @@ export default function Where() {
             >
               <div className="flex items-center">
                 <div className="w-7 sm:w-14 text-right mr-2">{index + 1}.</div>
-                <a
-                  className="hover:underline"
-                  href={
-                    place.link?.includes("http")
-                      ? place.link
-                      : `https://${place.link}`
-                  }
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {place.name}
-                </a>
+                {place.link ? (
+                  <a
+                    className="hover:underline"
+                    href={
+                      place.link?.includes("http")
+                        ? place.link
+                        : `https://${place.link}`
+                    }
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {place.name}
+                  </a>
+                ) : (
+                  place.name
+                )}
               </div>
               <button
                 className="hover:cursor-pointer"

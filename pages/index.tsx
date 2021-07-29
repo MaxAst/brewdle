@@ -54,7 +54,7 @@ export default function Home() {
           </label>
           <textarea
             id="occasion"
-            className="mb-4 p-3 outline-none appearance-none bg-black text-white w-full text-3xl sm:text-6xl"
+            className="mb-4 p-3 outline-none appearance-none bg-black text-white w-full text-3xl sm:text-6xl border-0"
             value={occasion}
             onChange={(e) => setOccasion(e.target.value)}
             onFocus={(e) => {
