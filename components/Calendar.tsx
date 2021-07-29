@@ -88,7 +88,7 @@ export default function Calendar({
       }
     }
   };
-  console.log(dates);
+
   return (
     <div className="bg-white rounded-lg shadow p-2 sm:p-4">
       <div className="flex justify-between items-center mb-8">

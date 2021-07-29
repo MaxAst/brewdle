@@ -9,7 +9,7 @@ export default function Home() {
 
   const handleFormSubmission = (e: React.FormEvent) => {
     e.preventDefault();
-    router.push("/time");
+    router.push("/when");
   };
 
   React.useEffect(() => {
@@ -17,7 +17,7 @@ export default function Home() {
       if (event.code === "Enter" && event.metaKey) {
         console.log("Enter key was pressed. Run your function.");
         event.preventDefault();
-        router.push("/time");
+        router.push("/when");
       }
     };
     document.addEventListener("keydown", listener);
@@ -42,7 +42,7 @@ export default function Home() {
       </Head>
       <header className="mb-12">
         <h1 className="text-3xl font-bold">brewdle</h1>
-        <h2 className="text-sm">the doodle.com alternative</h2>
+        <h2 className="text-sm">doodle.com for your social life</h2>
       </header>
       <div className="max-w-2xl mx-auto">
         <form className="w-full" onSubmit={handleFormSubmission}>
@@ -68,10 +68,27 @@ export default function Home() {
           />
           <button
             type="submit"
-            className="bg-gray-600 text-white py-2 px-4 ml-auto block text-lg disabled:cursor-not-allowed disabled:text-gray-500"
+            className="flex items-center bg-gray-600 text-white py-2 px-4 ml-auto text-lg disabled:cursor-not-allowed disabled:text-gray-500"
             disabled={occasion.length < 1}
           >
-            continue
+            <span className="mr-1">suggest dates</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z"
+                clipRule="evenodd"
+              />
+              <path
+                fillRule="evenodd"
+                d="M4.293 15.707a1 1 0 010-1.414L8.586 10 4.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z"
+                clipRule="evenodd"
+              />
+            </svg>
           </button>
         </form>
       </div>
