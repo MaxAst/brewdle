@@ -48,7 +48,7 @@ export default function Home() {
         <form className="w-full" onSubmit={handleFormSubmission}>
           <label
             htmlFor="occasion"
-            className="mb-4 block text-3xl sm:text-6xl font-bold"
+            className="mb-2 sm:mb-4 block text-4xl sm:text-6xl font-bold"
           >
             What&apos;s the occasion?
           </label>

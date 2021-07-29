@@ -46,7 +46,9 @@ export default function When() {
         <h2 className="text-sm">the doodle.com alternative</h2>
       </header>
       <div className="max-w-2xl mx-auto">
-        <p className="mb-4 block text-3xl sm:text-6xl font-bold">When?</p>
+        <p className="mb-2 sm:mb-4 block text-4xl sm:text-6xl font-bold">
+          When?
+        </p>
         <div className="mb-4 p-3 outline-none appearance-none bg-black text-white w-full text-6xl">
           <Calendar />
         </div>

@@ -99,15 +99,15 @@ export default function Where() {
         <h2 className="text-sm">the doodle.com alternative</h2>
       </header>
       <div className="max-w-2xl mx-auto">
-        <p className="mb-4 block text-3xl sm:text-6xl font-bold">Where?</p>
+        <p className="mb-4 block text-4xl sm:text-6xl font-bold">Where?</p>
         <ul className="mb-4">
           {places?.map((place, index) => (
             <li
               key={place.id}
-              className="flex items-center justify-between text-2xl sm:text-5xl mb-2"
+              className="flex items-center justify-between text-3xl sm:text-5xl mb-2"
             >
               <div className="flex items-center">
-                <div className="w-14 text-right mr-2">{index + 1}.</div>
+                <div className="w-7 sm:w-14 text-right mr-2">{index + 1}.</div>
                 <a
                   className="hover:underline"
                   href={
@@ -127,7 +127,7 @@ export default function Where() {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-8 w-8"
+                  className="h-7 w-7 sm:h-8 sm:w-8"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
