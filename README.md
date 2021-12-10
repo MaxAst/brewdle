@@ -1,5 +1,25 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## User Stories
+
+### Create a poll
+
+As a user, I visit the landing page and click on "create a poll". I give the occasion a name. Then I select dates that others can vote on. Next, I can optionally suggest places for the occasion (e.g. names and links of specific Airbnbs). Lastly, I have to provide my name and email address, so invitees know who the poll was created by and so that I get emails when someone submits a vote.
+
+### Edit a poll
+
+As a user, I can edit polls when I log in. This can be done with a magic link since a user has to provide their email address before creating the poll. Once logged in, I can view all polls created by me. I can click on a poll and go through the same flow as described above, prefilled with the already existing values for each step.
+
+### Invite people to a poll
+
+As a user, I can edit polls when I log in. This can be done with a magic link since a user has to provide their email address before creating the poll. Once logged in, I can view all polls created by me. I can click on a poll and go through the same flow as described above, prefilled with the already existing values for each step.
+
+### Participate in a poll
+
+#### From POV of creator
+
+#### From POV of invitee
+
 ## Getting Started
 
 First, run the development server:

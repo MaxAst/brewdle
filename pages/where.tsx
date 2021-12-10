@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { useCreateActivityContext } from "../context/CreateActivityContext";
+import { useCreatePollContext } from "../context/CreatePollContext";
 import Layout from "../components/Layout";
 import { ChevronDoubleRightIcon } from "@heroicons/react/solid";
 import { XCircleIcon } from "@heroicons/react/outline";
@@ -9,7 +9,7 @@ import { XCircleIcon } from "@heroicons/react/outline";
 const PlaceForm = () => {
   const [name, setName] = useState("");
   const [link, setLink] = useState("");
-  const { setPlaces } = useCreateActivityContext();
+  const { setPlaces } = useCreatePollContext();
   const ref = useRef<HTMLInputElement>(null);
 
   const addPlace = useCallback(() => {
@@ -28,7 +28,6 @@ const PlaceForm = () => {
   useEffect(() => {
     const listener = (event: any) => {
       if (event.code === "Enter" && event.metaKey) {
-        console.log("Enter key was pressed. Run your function.");
         event.preventDefault();
         addPlace();
       }
@@ -64,7 +63,7 @@ const PlaceForm = () => {
       />
       {name.length > 0 && (
         <button type="submit" className="text-lg mb-2 underline cursor-pointer">
-          add this place
+          Press enter or click here to add as choice
         </button>
       )}
     </form>
@@ -73,11 +72,11 @@ const PlaceForm = () => {
 
 export default function Where() {
   const router = useRouter();
-  const { places, setPlaces } = useCreateActivityContext();
+  const { places, setPlaces } = useCreatePollContext();
 
   const handlePlacesSubmission = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    router.push("/activity/1");
+    router.push("/poll/1");
   };
 
   const handleRemovePlace = (placeId: string) => {
@@ -85,41 +84,35 @@ export default function Where() {
   };
 
   return (
-    <Layout title="Where?">
-      <ul className="mb-4">
-        {places?.map((place, index) => (
-          <li
-            key={place.id}
-            className="flex items-center justify-between text-3xl sm:text-5xl mb-2"
-          >
-            <div className="flex items-center">
-              <div className="w-7 sm:w-14 text-right mr-2">{index + 1}.</div>
-              {place.link ? (
-                <a
-                  className="hover:underline"
-                  href={
-                    place.link?.includes("http")
-                      ? place.link
-                      : `https://${place.link}`
-                  }
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {place.name}
-                </a>
-              ) : (
-                place.name
-              )}
-            </div>
+    <Layout title="Where?" subtitle="Suggest places for others to vote on.">
+      <ol className="mb-4 list-decimal list-inside">
+        {places?.map((place) => (
+          <li key={place.id} className="relative text-3xl sm:text-5xl mb-2">
+            {place.link ? (
+              <a
+                className="hover:underline"
+                href={
+                  place.link?.includes("http")
+                    ? place.link
+                    : `https://${place.link}`
+                }
+                target="_blank"
+                rel="noreferrer"
+              >
+                {place.name}
+              </a>
+            ) : (
+              place.name
+            )}
             <button
-              className="hover:cursor-pointer"
+              className="absolute top-3 right-0 hover:cursor-pointer"
               onClick={() => handleRemovePlace(place.id)}
             >
               <XCircleIcon className="h-7 w-7 sm:h-8 sm:w-8" />
             </button>
           </li>
         ))}
-      </ul>
+      </ol>
       <PlaceForm />
       <button
         className="flex items-center bg-gray-600 text-white py-2 px-4 ml-auto text-lg disabled:cursor-not-allowed disabled:text-gray-500"

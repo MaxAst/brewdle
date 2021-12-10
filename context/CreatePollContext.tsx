@@ -6,43 +6,53 @@ type Place = {
   link?: string;
 };
 
-type CreateActivityContextType = {
+type CreatePollContextType = {
   occasion: string;
   setOccasion: React.Dispatch<React.SetStateAction<string>>;
   dates?: string[];
   setDates: React.Dispatch<React.SetStateAction<string[] | undefined>>;
+  name: string;
+  setName: React.Dispatch<React.SetStateAction<string>>;
+  email: string;
+  setEmail: React.Dispatch<React.SetStateAction<string>>;
   places?: Place[];
   setPlaces: React.Dispatch<React.SetStateAction<Place[] | undefined>>;
 };
 
-export const CreateActivityContext = createContext<CreateActivityContextType>(
-  {} as CreateActivityContextType
+export const CreatePollContext = createContext<CreatePollContextType>(
+  {} as CreatePollContextType
 );
 
-export default function SlackContextProvider({
+export default function CreatePollContextProvider({
   children,
 }: {
   children: React.ReactNode;
 }): JSX.Element {
   const [occasion, setOccasion] = useState("");
   const [dates, setDates] = useState<string[]>();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [places, setPlaces] = useState<Place[]>();
 
   return (
-    <CreateActivityContext.Provider
+    <CreatePollContext.Provider
       value={{
         occasion,
         setOccasion,
         dates,
         setDates,
+        name,
+        setName,
+        email,
+        setEmail,
         places,
         setPlaces,
       }}
     >
       {children}
-    </CreateActivityContext.Provider>
+    </CreatePollContext.Provider>
   );
 }
 
-export const useCreateActivityContext = (): CreateActivityContextType =>
-  useContext(CreateActivityContext);
+export const useCreatePollContext = (): CreatePollContextType =>
+  useContext(CreatePollContext);

@@ -1,5 +1,5 @@
 {
-  "name": "gottfried",
+  "name": "poodle",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,22 +9,24 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@heroicons/react": "^1.0.3",
-    "@supabase/supabase-js": "^1.21.0",
-    "date-fns": "^2.23.0",
-    "next": "11.0.1",
+    "@headlessui/react": "^1.0.5",
+    "@heroicons/react": "^1.4.1",
+    "@supabase/supabase-js": "^1.28.2",
+    "date-fns": "^2.26.0",
+    "next": "12.0.4",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "stripe": "^8.193.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@types/react": "17.0.14",
-    "@types/uuid": "^8.3.1",
-    "autoprefixer": "^10.3.1",
-    "eslint": "7.31.0",
-    "eslint-config-next": "11.0.1",
-    "postcss": "^8.3.6",
-    "tailwindcss": "^2.2.6",
-    "typescript": "4.3.5"
+    "@types/react": "17.0.37",
+    "@types/uuid": "^8.3.3",
+    "autoprefixer": "^10.4.0",
+    "eslint": "8.3.0",
+    "eslint-config-next": "12.0.4",
+    "postcss": "^8.4.4",
+    "tailwindcss": "^2.2.19",
+    "typescript": "4.5.2"
   }
 }

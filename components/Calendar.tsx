@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { useCreateActivityContext } from "../context/CreateActivityContext";
+import { useCreatePollContext } from "../context/CreatePollContext";
 import { isPast } from "date-fns";
 
 const MONTH_NAMES = [
@@ -23,7 +23,7 @@ export default function Calendar({
 }: {
   today?: Date;
 }): JSX.Element {
-  const { dates, setDates } = useCreateActivityContext();
+  const { dates, setDates } = useCreatePollContext();
   const [month, setMonth] = useState(today.getMonth());
   const [year, setYear] = useState(today.getFullYear());
   const [blankDays, setBlankDays] = useState<number[]>();
@@ -93,10 +93,10 @@ export default function Calendar({
     <div className="bg-white rounded-lg shadow p-2 sm:p-4">
       <div className="flex justify-between items-center mb-8">
         <div>
-          <span className="font-bold text-gray-800 text-3xl sm:text-6xl">
+          <span className="font-bold italic text-gray-800 text-3xl sm:text-6xl">
             {MONTH_NAMES[month]}
           </span>
-          <span className="ml-1 text-gray-600 font-normal text-3xl sm:text-6xl">
+          <span className="ml-2 text-gray-600 italic font-normal text-3xl sm:text-6xl">
             {year}
           </span>
         </div>
@@ -152,7 +152,7 @@ export default function Calendar({
       <div className="flex flex-wrap mb-3 -mx-1">
         {DAYS.map((day, i) => (
           <div key={i} className="px-1" style={{ width: `${100 / 7}%` }}>
-            <div className="text-gray-800 font-medium text-center text-sm">
+            <div className="text-gray-800 font-medium italic text-center text-sm">
               {day}
             </div>
           </div>

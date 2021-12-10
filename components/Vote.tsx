@@ -1,62 +1,61 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
+import { format } from "date-fns";
 import { CheckCircleIcon } from "@heroicons/react/solid";
+import useVotes from "../hooks/useVotes";
+import { useAuthContext } from "../context/AuthContext";
+import { toggleVote, userHasVotedOnThis } from "../lib/api/votes";
 
-type VoteOption = {
-  name: string;
+type VoteProps = {
+  value: string;
+  dateId: number;
   link?: string;
 };
 
-type VoteProps = {
-  title: string;
-  options: VoteOption[];
-};
+const Vote: FC<VoteProps> = ({ value, dateId, link }) => {
+  const { user } = useAuthContext();
+  const { votes, count } = useVotes(dateId);
+  const hasVoted = votes?.some((v) => v.user_id === user?.id);
 
-const Vote: FC<VoteProps> = ({ title, options }) => {
-  const [votes, setVotes] = useState<string[]>();
-
-  const handleVote = (optionName: string) => {
-    if (votes?.includes(optionName)) {
-      setVotes(votes.filter((o) => o !== optionName));
-    } else {
-      setVotes((votes) => (votes ? [...votes, optionName] : [optionName]));
+  const handleVote = async () => {
+    if (user) {
+      await toggleVote({
+        userId: user.id,
+        fullName: user.user_metadata.full_name,
+        dateId,
+      });
     }
   };
 
+  if (!user) return null;
+
   return (
-    <div className="mb-2 bg-black p-4 text-white">
-      <h3 className="mb-4 text-2xl">{title}</h3>
-      <ul>
-        {options?.map((option) => (
-          <li
-            key={option.name}
-            className={`flex items-center justify-between border-white border-2 px-4 py-2 text-xl sm:text-3xl mb-2 last:mb-0 hover:cursor-pointer ${
-              votes?.includes(option.name) ? `bg-white text-black` : ""
-            }`}
-            onClick={() => handleVote(option.name)}
+    <li className="h-14 grid grid-cols-12 gap-x-2 text-2xl sm:text-3xl mb-3 last:mb-0">
+      <p
+        className={`relative col-span-9 flex items-center w-full h-full border-white border-2 px-4 py-2 hover:cursor-pointer ${
+          hasVoted ? `bg-white text-black` : ""
+        }`}
+        onClick={handleVote}
+      >
+        {link ? (
+          <a
+            className="hover:underline"
+            href={link?.includes("http") ? link : `https://${link}`}
+            target="_blank"
+            rel="noreferrer"
           >
-            {option.link ? (
-              <a
-                className="hover:underline"
-                href={
-                  option.link?.includes("http")
-                    ? option.link
-                    : `https://${option.link}`
-                }
-                target="_blank"
-                rel="noreferrer"
-              >
-                {option.name}
-              </a>
-            ) : (
-              option.name
-            )}
-            {votes?.includes(option.name) && (
-              <CheckCircleIcon className="h-8 w-8" />
-            )}
-          </li>
-        ))}
-      </ul>
-    </div>
+            {value}
+          </a>
+        ) : (
+          format(new Date(value), "do MMM, yyyy")
+        )}
+        {hasVoted && (
+          <CheckCircleIcon className="absolute -top-3 -right-4 h-8 w-8 bg-black text-green-400 rounded-full" />
+        )}
+      </p>
+      <p className="ml-auto col-span-3 flex items-center text-xl sm:text-3xl hover:underline hover:cursor-pointer">
+        {count} votes
+      </p>
+    </li>
   );
 };
 

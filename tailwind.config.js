@@ -13,6 +13,9 @@ module.exports = {
       fontFamily: {
         sans: ["Kollektif", ...defaultTheme.fontFamily.sans],
       },
+      gridTemplateRows: {
+        layout: "80px 1fr 100px",
+      },
     },
   },
   variants: {
