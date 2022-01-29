@@ -37,15 +37,13 @@ export default function DropdownMenu() {
           <div className="px-1 py-1">
             <Menu.Item>
               {({ active }) => (
-                <Link href="/polls">
-                  <div
-                    className={`${
-                      active ? "bg-black text-white" : "text-gray-900"
-                    } group flex rounded-md items-center w-full px-2 py-2 text-sm italic hover:cursor-pointer`}
-                  >
-                    My Polls
-                  </div>
-                </Link>
+                <div
+                  className={`${
+                    active ? "bg-black text-white" : "text-gray-900"
+                  } group flex rounded-md items-center w-full px-2 py-2 text-sm italic hover:cursor-pointer`}
+                >
+                  <Link href="/polls">My Polls</Link>
+                </div>
               )}
             </Menu.Item>
             <Menu.Item>

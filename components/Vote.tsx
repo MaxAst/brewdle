@@ -1,9 +1,10 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { format } from "date-fns";
 import { CheckCircleIcon } from "@heroicons/react/solid";
 import useVotes from "../hooks/useVotes";
 import { useAuthContext } from "../context/AuthContext";
-import { toggleVote, userHasVotedOnThis } from "../lib/api/votes";
+import { toggleVote } from "../lib/api/votes";
+import VotersModal from "./VotersModal";
 
 type VoteProps = {
   value: string;
@@ -12,6 +13,7 @@ type VoteProps = {
 };
 
 const Vote: FC<VoteProps> = ({ value, dateId, link }) => {
+  const [votersModalIsOpen, setVotersModalIsOpen] = useState(false);
   const { user } = useAuthContext();
   const { votes, count } = useVotes(dateId);
   const hasVoted = votes?.some((v) => v.user_id === user?.id);
@@ -23,6 +25,16 @@ const Vote: FC<VoteProps> = ({ value, dateId, link }) => {
         fullName: user.user_metadata.full_name,
         dateId,
       });
+    }
+  };
+
+  const closeModal = () => {
+    setVotersModalIsOpen(false);
+  };
+
+  const openModal = () => {
+    if (votes?.length) {
+      setVotersModalIsOpen(true);
     }
   };
 
@@ -52,9 +64,19 @@ const Vote: FC<VoteProps> = ({ value, dateId, link }) => {
           <CheckCircleIcon className="absolute -top-3 -right-4 h-8 w-8 bg-black text-green-400 rounded-full" />
         )}
       </p>
-      <p className="ml-auto col-span-3 flex items-center text-xl sm:text-3xl hover:underline hover:cursor-pointer">
+      <button
+        type="button"
+        onClick={openModal}
+        className="ml-auto col-span-3 flex items-center text-xl sm:text-3xl hover:underline hover:cursor-pointer"
+      >
         {count} votes
-      </p>
+      </button>
+      <VotersModal
+        isOpen={votersModalIsOpen}
+        closeModal={closeModal}
+        votes={votes}
+        date={format(new Date(value), "do MMM, yyyy")}
+      />
     </li>
   );
 };
